@@ -18,11 +18,9 @@ import java.util.List;
 public class CountryResource {
 
     private CountryDao countryDao;
-    private CityDao cityDao;
 
-    public CountryResource(CountryDao countryDao, CityDao cityDao) {
+    public CountryResource(CountryDao countryDao) {
         this.countryDao = countryDao;
-        this.cityDao = cityDao;
     }
 
     // unitOfWork anotasyonu sessionu tutan transaction açar
@@ -72,14 +70,4 @@ public class CountryResource {
         Country addedCountry = countryDao.insert(country);
         return addedCountry;
     }
-
-
-    @GET
-    @Path("/population/{population}")
-    @UnitOfWork
-    public List<City> getCitiesByPopulation(@PathParam("population") int population) {
-        return cityDao.getCitiesByPopulation(population);
-    }
-
-
 }

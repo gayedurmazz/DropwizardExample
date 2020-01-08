@@ -2,10 +2,7 @@ package com.uniyaz.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "city")
@@ -21,6 +18,7 @@ public class City extends BaseEntity {
     private String name;
 
     @Column(name = "CountryCode", columnDefinition = "char")
+//    @ForeignKey()
     @JsonProperty
     private String countryCode;
 
