@@ -28,6 +28,4 @@ public class CityDao extends AbstractDAO<City>{
         List<City> cityList = query.list();
         return cityList;
     }
-
-
 }

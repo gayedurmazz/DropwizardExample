@@ -3,6 +3,7 @@ package com.uniyaz;
 import com.uniyaz.configuration.HibernateConfiguration;
 import com.uniyaz.dao.CityDao;
 import com.uniyaz.dao.CountryDao;
+import com.uniyaz.entity.City;
 import com.uniyaz.entity.Country;
 import com.uniyaz.resource.CityResource;
 import com.uniyaz.resource.CountryResource;
@@ -23,24 +24,17 @@ public class DropwizardApp extends Application<HibernateConfiguration> {
             return hibernateConfiguration.getDatabaseAppDataSourceFactory();
         }
     };
-    private final HibernateBundle<HibernateConfiguration> hibernate2 = new HibernateBundle<HibernateConfiguration>(Country.class) {
-        @Override
-        public DataSourceFactory getDataSourceFactory(HibernateConfiguration hibernateConfiguration) {
-            return hibernateConfiguration.getDatabaseAppDataSourceFactory();
-        }
-    };
 
     @Override
     public void initialize(Bootstrap<HibernateConfiguration> bootstrap) {
         bootstrap.addBundle(hibernate);
-        bootstrap.addBundle(hibernate2);
     }
 
     @Override
     public void run(HibernateConfiguration hibernateConfiguration, Environment environment) throws Exception {
 
         final CountryDao countryDao = new CountryDao(hibernate.getSessionFactory());
-        final CityDao cityDao = new CityDao(hibernate2.getSessionFactory());
+        final CityDao cityDao = new CityDao(hibernate.getSessionFactory());
 
 
         final CountryResource countryResource = new CountryResource(countryDao);
