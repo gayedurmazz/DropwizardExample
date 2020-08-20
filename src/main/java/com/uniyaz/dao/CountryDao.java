@@ -35,7 +35,7 @@ public class CountryDao extends AbstractDAO<Country> {
 
     public Country insert(Country country){
         return persist(country);
-        // persist = save and update
+        // persist = save and update işlemi
     }
 
     // Kıtadaki şehirler
@@ -45,7 +45,7 @@ public class CountryDao extends AbstractDAO<Country> {
         CriteriaQuery<Country>criteriaQuery = builder.createQuery(Country.class);
         Root<Country>root = criteriaQuery.from(Country.class);
         criteriaQuery.select(root).where(builder.equal(root.get("continent"), continent));
-        Query<Country> query = currentSession().createQuery(criteriaQuery);
+        Query<Country> query = currentSession().createQuery(criteriaQuery).setMaxResults(10);
         List<Country> countryList = query.list();
         return countryList;
     }

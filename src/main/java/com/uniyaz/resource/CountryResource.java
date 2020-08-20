@@ -1,12 +1,9 @@
 package com.uniyaz.resource;
 
-import com.uniyaz.dao.CityDao;
 import com.uniyaz.dao.CountryDao;
-import com.uniyaz.entity.City;
 import com.uniyaz.entity.Country;
 import io.dropwizard.hibernate.UnitOfWork;
 
-import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -70,4 +67,14 @@ public class CountryResource {
         Country addedCountry = countryDao.insert(country);
         return addedCountry;
     }
+
+
+    @GET
+    @Path("listContinentsCountry")
+    @UnitOfWork
+    public List<Country> listContinentsCountry(@QueryParam("continent") String continent){
+        List<Country> continentCountries = countryDao.getContinentCountries(continent);
+        return continentCountries;
+    }
+
 }

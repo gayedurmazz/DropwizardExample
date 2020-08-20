@@ -1,7 +1,6 @@
 package com.uniyaz.resource;
 
 import com.uniyaz.dao.CityDao;
-import com.uniyaz.dao.CountryDao;
 import com.uniyaz.entity.City;
 import io.dropwizard.hibernate.UnitOfWork;
 

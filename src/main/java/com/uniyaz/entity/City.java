@@ -17,10 +17,11 @@ public class City extends BaseEntity {
     @JsonProperty
     private String name;
 
-    @Column(name = "CountryCode", columnDefinition = "char")
-//    @ForeignKey()
+    @Column(name = "Country")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CountryCode", referencedColumnName = "Code", foreignKey = @ForeignKey(name = "FK_CITY_COUNTRY"))
     @JsonProperty
-    private String countryCode;
+    private Country country;
 
     @Column(name = "Population", columnDefinition = "int")
     @JsonProperty
@@ -42,12 +43,12 @@ public class City extends BaseEntity {
         this.name = name;
     }
 
-    public String getCountryCode() {
-        return countryCode;
+    public Country getCountry() {
+        return country;
     }
 
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     public int getPopulation() {
